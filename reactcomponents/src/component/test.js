@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {PRODUCTS} from "./MockData";
 
 
 class Mylist extends Component {
