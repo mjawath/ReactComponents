@@ -7,8 +7,9 @@ import DataGrid from './component/DataGrid'
 
 class App extends Component {
     render() {
-        const test = (data)=>{
-            return <span>my tag cool {data}</span>;
+        let myitems = ["item--1","item--2","item--3","item--4","item--5","item--6"]
+        const myRenderer = (data,index)=>{
+            return <span>my tag cool {index}--{data}  </span>;
         };
         return (
             <div className="App">
@@ -18,8 +19,9 @@ class App extends Component {
 
                 </div>
                 <div className="App-intro">
+                    <DataGrid collection={myitems} contentRender={myRenderer}>
 
-                    <DataGrid contentRender={test}></DataGrid>
+                    </DataGrid>
                 </div>
             </div>
         );
