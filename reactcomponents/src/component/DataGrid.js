@@ -7,14 +7,30 @@ class DataGrid extends Component{
     static get propTypes() {
         return {
             collection: PropTypes.array.isRequired,
-            contentRender: PropTypes.func.isRequired
-
+            contentRender: PropTypes.func.isRequired,
+            itemEvent: PropTypes.func
         }
     }
 
-    constructor(columns,rows){
-        super();
+    itemEventTest(){
+        console.log(" DataGrid itemEventTest");
     }
+    customeE(dat){
+        console.log("---------------"+dat);
+    }
+    onParentLevelSelectedEvent(){
+
+        console.log("onParentLevelSelectedEvent "+ ++this.testCounter )
+    }
+
+    constructor(){
+        super();
+        this.customeE = this.customeE.bind(this);
+        this.onParentLevelSelectedEvent = this.onParentLevelSelectedEvent.bind(this);
+        this.testCounter = 0;
+    }
+
+
 
     setItems(data){
 
@@ -29,7 +45,9 @@ class DataGrid extends Component{
             let index=0;
             for (const item of collection){
                 comps.push(<div key={'DataGrid-ItemKey'+ index}>
-                    {contentRender(item,index++)}
+                    {contentRender(item,index++,this.onParentLevelSelectedEvent)}
+                    <button onClick={()=>   this.customeE(item)}>ttttttttttt</button>
+                    <button onClick={this.itemEventTest}>ttttttttttt 2222222</button>
                 </div>);
             }
             return <div>{comps}</div>;
