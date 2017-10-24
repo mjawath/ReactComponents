@@ -11,22 +11,22 @@ class DataGrid extends Component{
             itemEvent: PropTypes.func
         }
     }
-
-    itemEventTest(){
+    //arrow function preserves the this context
+    itemEventTest =()=>{
         console.log(" DataGrid itemEventTest");
     }
     customeE(dat){
         console.log("---------------"+dat);
     }
-    onParentLevelSelectedEvent(){
+    onParentLevelSelectedEvent=()=>{
 
         console.log("onParentLevelSelectedEvent "+ ++this.testCounter )
     }
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.customeE = this.customeE.bind(this);
-        this.onParentLevelSelectedEvent = this.onParentLevelSelectedEvent.bind(this);
+        // this.onParentLevelSelectedEvent = this.onParentLevelSelectedEvent.bind(this);
         this.testCounter = 0;
     }
 

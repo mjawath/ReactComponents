@@ -6,13 +6,16 @@ import DataGrid from './component/DataGrid'
 
 
 class App extends Component {
-    constructor(){
-        super();
-        this.test = this.test.bind(this);
+    constructor(props){
+        super(props);
+        // this.test = this.test.bind(this);
+        this.appindex=0;
     }
 
     test =(item)=>{
+        this.appindex++;
         console.log(item);
+        console.log(this.appindex);
     }
 
     overiddenTest(){
