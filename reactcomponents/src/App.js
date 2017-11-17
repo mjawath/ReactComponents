@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import OutSide from './OutSide';
 import DataGrid from './component/DataGrid'
 
 
@@ -23,28 +24,36 @@ class App extends Component {
     }
 
     render() {
-        let myitems = ["item--1","item--2","item--3","item--4","item--5","item--6"]
-        const myRenderer = (data,index,onSelectedEvent)=>{
+        let myitems = ["item--1","item--2","item--3","item--4","item--5","item--6"];
+        const myRenderer = ({data,index,onSelectedEvent})=>{
             return <div>
                         <span>my tag cool {index}--{data}  </span>
-                        <button onClick={()=>this.test(data)}>push</button>
-                        <button onClick={()=>{
+                        <button className="button" onClick={()=>this.test(data)}>push</button>
+                        <button onClick={(()=>{
                             console.log("test...............");
-                            if(index !== 2)
-                            onSelectedEvent();
-                        }
+                            // if(index !== 2)
+                                onSelectedEvent();
+                        }).bind(this)
                         }>parent method called</button>
             </div>;
         };
+
+        const test = ({name})=>{
+           return <div><span>my paaaaaaaaaaaaaaa {name}</span></div>
+        };
+
+
         return (
-            <div className="App">
+
+
+             <div className="App">
                 <div className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h2>ReactComponents</h2>
 
                 </div>
                 <div className="App-intro">
-                    <DataGrid  collection={myitems} contentRender={myRenderer} >
+                    <DataGrid  collection={myitems} contentRender={myRenderer} footer = {OutSide}>
 
                     </DataGrid>
                 </div>

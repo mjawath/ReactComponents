@@ -8,6 +8,7 @@ class DataGrid extends Component{
         return {
             collection: PropTypes.array.isRequired,
             contentRender: PropTypes.func.isRequired,
+            footer: PropTypes.func.isRequired,
             itemEvent: PropTypes.func
         }
     }
@@ -37,6 +38,7 @@ class DataGrid extends Component{
     }
 
     render(){
+        const  CustomFooter =this.props.footer;// capitalisation is importent without it , this is not working
 
         let contentRender = this.props.contentRender;
         if(contentRender){
@@ -50,7 +52,10 @@ class DataGrid extends Component{
                     <button onClick={this.itemEventTest}>ttttttttttt 2222222</button>
                 </div>);
             }
-            return <div>{comps}</div>;
+            return <div>
+                    {comps}
+                {CustomFooter && <CustomFooter name="jawath"/>}
+            </div>;
         }
        return <div>default implementation of list iteration should go her</div>
     }
