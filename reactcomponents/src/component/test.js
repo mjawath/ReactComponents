@@ -1,6 +1,24 @@
 import React, {Component} from 'react';
-import {PRODUCTS} from "./MockData";
+import {PRODUCTS,Items} from "./MockData";
+import DataTemplateUI from './DataTemplateUI';
+import DataCollectionUI from './DataCollectionUI';
+import OutSide from './OutSide';
+import MyCustomDataTem from './MyCustomDataTem';
 
+
+let myitems = ["item--1","item--2","item--3","item--4","item--5","item--6"];
+
+const myRenderer = ({data,index,onSelectedEvent})=>{
+    return <div>
+        <span>my tag cool {index}--{data}  </span>
+        <button className="button" onClick={()=>this.test(data)}>push</button>
+        <button onClick={onSelectedEvent}>parent method called</button>
+    </div>;
+};
+
+const test = ({name})=>{
+    return <div><span>my paaaaaaaaaaaaaaa {name}</span></div>
+};
 
 class Mylist extends Component {
 
@@ -9,7 +27,13 @@ class Mylist extends Component {
         return (
             <div className="App">
                 <h2>Welcome to test list</h2>
-                <FilterableProductTable products={PRODUCTS}/>
+                {/*<FilterableProductTable products={PRODUCTS}/>*/}
+
+                <DataCollectionUI collection={Items} footer = {OutSide} contentRender={MyCustomDataTem}>
+
+                </DataCollectionUI>
+                {/*{myRenderer({data:'test',index:27,onSelectedEvent:this.overiddenTest})}*/}
+
             </div>
         );
     }

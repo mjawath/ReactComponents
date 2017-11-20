@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import OutSide from './OutSide';
-import DataGrid from './component/DataGrid'
+import Mylist from './component/test'
 
 
 
@@ -20,27 +19,13 @@ class App extends Component {
     }
 
     overiddenTest(){
-
+        console.log("tetetere");
     }
 
-    render() {
-        let myitems = ["item--1","item--2","item--3","item--4","item--5","item--6"];
-        const myRenderer = ({data,index,onSelectedEvent})=>{
-            return <div>
-                        <span>my tag cool {index}--{data}  </span>
-                        <button className="button" onClick={()=>this.test(data)}>push</button>
-                        <button onClick={(()=>{
-                            console.log("test...............");
-                            // if(index !== 2)
-                                onSelectedEvent();
-                        }).bind(this)
-                        }>parent method called</button>
-            </div>;
-        };
 
-        const test = ({name})=>{
-           return <div><span>my paaaaaaaaaaaaaaa {name}</span></div>
-        };
+
+    render() {
+
 
 
         return (
@@ -53,10 +38,8 @@ class App extends Component {
 
                 </div>
                 <div className="App-intro">
-                    <DataGrid  collection={myitems} contentRender={myRenderer} footer = {OutSide}>
-
-                    </DataGrid>
-                </div>
+                    <Mylist/>
+               </div>
             </div>
         );
     }
