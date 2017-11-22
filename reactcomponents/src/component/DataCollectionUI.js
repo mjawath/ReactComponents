@@ -68,8 +68,9 @@ DataCollectionUI.propTypes = {
 
         collection: PropTypes.array.isRequired,
         contentRender: PropTypes.func.isRequired,
-        footer: PropTypes.func.isRequired,
-        itemEvent: PropTypes.func
+        footer: PropTypes.func,
+        itemEvent: PropTypes.func,
+        selectedItem: PropTypes.object
 
 }
 export default DataCollectionUI;
