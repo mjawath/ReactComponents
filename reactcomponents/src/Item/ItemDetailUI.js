@@ -1,6 +1,7 @@
 import React     from 'react';
 import DetailUI from '../Detail/DetailUI';
 import Item from './Item';
+import {Input,Form} from '../component/form'
 import PropTypes from 'prop-types';
 
 export default class ItemDetailUI extends DetailUI {
@@ -36,6 +37,10 @@ export default class ItemDetailUI extends DetailUI {
     }
     render(){
         return <div>
+            <Form>
+                <Input/>
+            </Form>
+
             <form method="POST">
 
                 <label>

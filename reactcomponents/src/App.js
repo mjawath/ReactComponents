@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ItemUI from './Item/ItemUI'
 import Mylist from './component/test'
 import ItemDetailUI from './Item/ItemDetailUI';
 import {Items} from './component/MockData';
@@ -50,13 +51,9 @@ class App extends Component {
 
                 </div>
                 <div className="App-intro">
-                    <ItemDetailUI onSubmit={this.onDataSub}>
-                    </ItemDetailUI>
-                    {/*<Mylist/>*/}
+                <ItemUI>
 
-                    <DataCollectionUI collection={items}  contentRender={MyCustomDataTem}
-                                      selectedItem ={this.state.item}>
-                    </DataCollectionUI>
+                </ItemUI>
 
                </div>
             </div>
