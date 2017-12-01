@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ItemUI from './Item/ItemUI'
-import Mylist from './component/test'
-import ItemDetailUI from './Item/ItemDetailUI';
-import {Items} from './component/MockData';
-import MyCustomDataTem from './component/MyCustomDataTem';
-import DataCollectionUI from './component/DataCollectionUI';
+import ItemUI from './Item/ItemUI';
+import store from './Store';
 
-let items = Items;
+
+
+
 class App extends Component {
 
     constructor(props){
@@ -16,7 +14,6 @@ class App extends Component {
         // this.test = this.test.bind(this);
         this.appindex=0;
         this.state = {} //initial empty state
-        this.onDataSub = this.onDataSub.bind(this);
 
     }
 
@@ -30,20 +27,9 @@ class App extends Component {
         console.log("tetetere");
     }
 
-    onDataSub(item){
-        console.log(item);
-        items.push(item);
-
-        this.setState(()=>{
-            item:{}
-        });
-    }
-
     render() {
 
         return (
-
-
              <div className="App">
                 <div className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>

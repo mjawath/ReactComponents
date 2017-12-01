@@ -1,7 +1,7 @@
 import React     from 'react';
 import DetailUI from '../Detail/DetailUI';
 import Item from './Item';
-import {Input,Form} from '../component/form'
+import {Input,Form,Field} from '../component/form'
 import PropTypes from 'prop-types';
 
 export default class ItemDetailUI extends DetailUI {
@@ -13,7 +13,20 @@ export default class ItemDetailUI extends DetailUI {
             item: this.item
         };
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        // this.onSubmit = this.onSubmit.bind(this);
+
+        this.formData = {
+            fields:[
+                {name:"name", type:"text",component:"input"},
+                {name:"desc", type:"text",component:"input"}
+            ],
+            onSubmit:this.handleSubmit
+        }
+    }
+
+    handlennSubmit(values){
+        console.log("----------------------------------------------------");
+        console.log(values);
     }
 
 
@@ -36,35 +49,12 @@ export default class ItemDetailUI extends DetailUI {
         this.setState({item:{}});
     }
     render(){
+        console.log("test")
         return <div>
-            <Form>
-                <Input/>
+            <Form onSubmit={this.handlennSubmit} formScal={this.formData}>
             </Form>
 
-            <form method="POST">
-
-                <label>
-                    code
-                    <input
-                        name="name"
-                        type="text"
-                        value={this.state.item.name}
-
-                        onChange={this.handleInputChange}/>
-                </label><br />
-                <label>
-                    description
-                    <input
-                        name="desc"
-                        type="text"
-                        value={this.state.item.desc}
-                        onChange={this.handleInputChange}/>
-                </label>
-
-                <label>
-                    <button onClick={this.onSubmit}>pls submit </button>
-                </label>
-            </form>
+            <button onClick={this.onSubmit}>test</button>
         </div>
     }
 

@@ -8,8 +8,13 @@ import ItemDetailUI from './ItemDetailUI';
 import ItemListUI from './ItemListUI';
 import {Items} from '../component/MockData';
 
-
+let items = Items;
 export default class ItemUI extends EntityUI{
+
+    constructor(){
+        super();
+        this.onDataSub = this.onDataSub.bind(this);
+    }
 
     render(){
         return <div>
@@ -21,6 +26,15 @@ export default class ItemUI extends EntityUI{
                     </ItemListUI>
                 </div>;
 
+    }
+
+    onDataSub(item){
+        console.log(item);
+        items.push(item);
+
+        this.setState(()=>{
+            item:{}
+        });
     }
 
 }
