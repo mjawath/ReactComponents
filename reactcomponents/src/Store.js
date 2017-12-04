@@ -2,6 +2,9 @@ import { createStore, applyMiddleware,combineReducers } from 'redux';
 import { reducer as formReducer  } from 'redux-form';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+// import {ADD_ITEM} from "./Item/ItemDetailUI";
+import {ADD_ITEM} from "./Item/state/types";
+import {ItemR as item} from './Item/state/ItemStore';
 
 const middleware = [ thunk ];
 if (process.env.NODE_ENV !== 'production') {
@@ -12,7 +15,24 @@ const rootReducer = combineReducers({
     // ...your other reducers here
     // you have to pass formReducer under 'form' key,
     // for custom keys look up the docs for 'getFormState'
-    form: formReducer
+    form: formReducer.plugin({
+        item:(state,action)=>{
+
+            switch (action.type){
+                case ADD_ITEM:
+                    let value = state.fields.qty;
+                    let nlastName = state.fields.lastName? (state.fields.lastName+ value): value;
+                    // let newvalues = [lastName];
+                    return {...state,fields:{...state.fields,lastName:nlastName}};
+                default: state;
+
+
+            }
+            return state;
+
+        }
+    }),
+    itemForm:item
 });
 
 const store = createStore(
