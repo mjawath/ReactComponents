@@ -13,7 +13,7 @@ export const  PRODUCTS = [
 
 
 export const Items = [
-    {idx :0, desc: 'Sfffffporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+    {idx :0, desc: 'Sfffffporting Goods', price: '$49.99' ,stocked: true, name: 'Football'},
     {idx :1, desc: 'Spoffrting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
     {idx :2, desc: 'Spfforting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
     {idx :3, desc: 'Eleffctronics', price: '$99.99', stocked: true, name: 'iPod Touch'},

@@ -45,12 +45,12 @@ class DataCollectionUI extends Component{
         const comps = [];
             let index=0;
             for (const item of collection){
-                comps.push(<div key={'DataCollectionUI-ItemKey'+ index}>
-                    <ContentRender item={item} index={index++}
+                comps.push(<div key={'DataCollectionUI-ItemKey'+ (index++)}>
+                    <ContentRender data={item} index={index}
                                    onSelectedEvent={this.onParentLevelSelectedEvent}>
 
                     </ContentRender>
-                    <button onClick={()=>   this.customeE(item)}>parent add</button>
+                    <button onClick={()=>   this.props.onSelect(item)}>view</button>
                     <button onClick={this.itemEventTest}>parent edit</button>
 
                 </div>);
@@ -67,10 +67,11 @@ class DataCollectionUI extends Component{
 DataCollectionUI.propTypes = {
 
         collection: PropTypes.array.isRequired,
-        contentRender: PropTypes.func.isRequired,
+        contentRender: PropTypes.func,
         footer: PropTypes.func,
         itemEvent: PropTypes.func,
-        selectedItem: PropTypes.object
+        selectedItem: PropTypes.object,
+        onSelect: PropTypes.func
 
 }
 export default DataCollectionUI;

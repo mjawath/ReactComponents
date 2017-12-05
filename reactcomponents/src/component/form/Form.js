@@ -2,7 +2,8 @@
  * Created by jawa on 11/23/17.
  */
 import React,{Component} from 'react';
-import {reduxForm,Field} from "redux-form";
+import {reduxForm,Field,reset} from "redux-form";
+const ini = {name:"test name",qty:35,desc:"222"}
 
 
 class Form extends Component{
@@ -13,22 +14,14 @@ class Form extends Component{
         }
     }
 
-    render(){
-        const { handleSubmit, pristine, reset, submitting } = this.props;
-
-        return <form onSubmit={handleSubmit} /*action={this.props.action}*/  /*method={this.props.method ? this.props.method : 'post'}*/
-                     {...this.props.extras}>
-            {this.props.children}
-            {this.renderFields()}
-            {this.renderControlButtons()}
-        </form>
-    };
 
     renderFields=()=> {
         const compo=[];
         const formUI = this.props.formUI;
+        let index =0;
         if (formUI.fields) {
             formUI.fields.map(field => {
+                field.keyindex = index++;
                 compo.push(this.renderField(field));
             });
         }
@@ -38,10 +31,10 @@ class Form extends Component{
     renderField=(field)=>{
         let fieldOnly = this.renderFieldOnly(field);
         if (!field.label || field.label===false) {
-            return <div>{fieldOnly}</div>;
+            return <div key={field.keyindex}>{fieldOnly}</div>;
         }else if(field.label && ( field.label instanceof Component)){
             const Label = field.label;//should be a component
-            return <div><Label/>{fieldOnly}</div>;
+            return <div key={field.keyindex}><Label/>{fieldOnly}</div>;
         }else{
             return this.renderFieldWithLabel(field);
         }
@@ -49,7 +42,7 @@ class Form extends Component{
         {/*const f= field.noLable ? :;*/}
     }
     renderFieldWithLabel=(field)=>{
-        return (<div>
+        return (<div key={field.keyindex}>
             {this.renderLabel(field)}
             {this.renderFieldOnly(field)}
         </div>);
@@ -60,7 +53,7 @@ class Form extends Component{
             component={field.component}
             type={field.type}
             placeholder={field.placeholder}
-            onChange={field.onChange}
+            onChange={this.handleChangex}
         />;
         // return <Field/>;
     }
@@ -85,6 +78,9 @@ class Form extends Component{
         </div>;
     }
 
+    clear=() =>{
+     this.props.submit();
+    }
 
     //   handleSubmit=(values)=>{
     //     // e.preventDefault();
@@ -92,14 +88,34 @@ class Form extends Component{
     //     console.log(values);
     // }
 
-    handleChangex=(value)=>{
+    handleChangex=(event, newValue, previousValue)=>{
         console.log("changeeeeeeeeeeeeeeeeeeeeeee")
-        console.log(value);
+        console.log(newValue);
         //do i can trigger reducer
-        this.props.change("lastName","new llll");
+        // this.props.change("storableQty",newValue);
+        const tt= this.props.test(event, newValue, previousValue);
+        for (const key in tt) {
+            this.props.change(key, tt[key]);
+        }
+        // window.alert("post "+tt);
 
+        console.log(tt)
+    }
+    clear=()=>{
+        this.props.clear();
     }
 
+
+    render(){
+        const { handleSubmit, pristine, reset, submitting } = this.props;
+        console.log(this.props.initialValues);
+        return <form onSubmit={handleSubmit} /*action={this.props.action}*/  /*method={this.props.method ? this.props.method : 'post'}*/
+                     {...this.props.extras}  >
+            {this.props.children}
+            {this.renderFields()}
+            {this.renderControlButtons()}
+        </form>
+    };
 
 
     renderTestForm=()=>{
@@ -151,38 +167,16 @@ class Form extends Component{
     }
 }
 
-
-
-
-const validate = values => {
-    const errors = {}
-    if (!values.username) {
-        errors.username = 'Required'
-    } else if (values.username.length > 15) {
-        errors.username = 'Must be 15 characters or less'
-    }
-    if (!values.email) {
-        errors.email = 'Required'
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address'
-    }
-    if (!values.age) {
-        errors.age = 'Required'
-    } else if (isNaN(Number(values.age))) {
-        errors.age = 'Must be a number'
-    } else if (Number(values.age) < 18) {
-        errors.age = 'Sorry, you must be at least 18 years old'
-    }
-    return errors
-};
-
-const warn = values => {
-    const warnings = {}
-    if (values.age < 19) {
-        warnings.age = 'Hmm, you seem a bit young...'
-    }
-    return warnings
+Form.clearx=(dispatch,formName)=>{
+    dispatch(reset(formName));
 }
+
+export default reduxForm({
+    //form: 'item', // a unique identifier for this form
+
+
+})(Form);
+
 
 
 
@@ -220,11 +214,33 @@ export const phoneNumber = value =>
         ? 'Invalid phone number, must be 10 digits'
         : undefined;
 
+const validate = values => {
+    const errors = {}
+    if (!values.username) {
+        errors.username = 'Required'
+    } else if (values.username.length > 15) {
+        errors.username = 'Must be 15 characters or less'
+    }
+    if (!values.email) {
+        errors.email = 'Required'
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = 'Invalid email address'
+    }
+    if (!values.age) {
+        errors.age = 'Required'
+    } else if (isNaN(Number(values.age))) {
+        errors.age = 'Must be a number'
+    } else if (Number(values.age) < 18) {
+        errors.age = 'Sorry, you must be at least 18 years old'
+    }
+    return errors
+};
 
-
-export default reduxForm({
-    form: 'item', // a unique identifier for this form
-    validate,
-
-})(Form);
+const warn = values => {
+    const warnings = {}
+    if (values.age < 19) {
+        warnings.age = 'Hmm, you seem a bit young...'
+    }
+    return warnings
+}
 

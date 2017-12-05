@@ -14,14 +14,19 @@ export default class ItemUI extends EntityUI{
     constructor(){
         super();
         this.onDataSub = this.onDataSub.bind(this);
+        this.state ={
+            selectedItem:{}
+        }
     }
 
     render(){
+        console.log("=================================================================");
+        console.log(this.state.selectedItem);
         return <div>
-                    <ItemDetailUI>
+                    <ItemDetailUI tt={this.state.tt} data={this.state.selectedItem}>
 
                     </ItemDetailUI>
-                    <ItemListUI>
+                    <ItemListUI onSelectItem={this.onSelectItem}>
 
                     </ItemListUI>
                 </div>;
@@ -37,4 +42,11 @@ export default class ItemUI extends EntityUI{
         });
     }
 
+    onSelectItem=(item)=>{
+        // this.selectedItem = item;
+        this.setState(()=>{
+           return{ selectedItem:item,
+            tt : item.name}
+        });
+    }
 }

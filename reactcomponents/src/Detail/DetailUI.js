@@ -13,6 +13,6 @@ export default class DetailUI extends Component{
 }
 
 DetailUI.proptype = {
-    item: PropTypes.object,
+    data: PropTypes.object,
     onSubmit: PropTypes.func
 };

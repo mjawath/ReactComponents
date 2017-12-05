@@ -13,9 +13,9 @@ class ItemRowRender extends DataTemplateUI{
 
     render(){
         return<div>
-            <span>my tag cool {this.props.index}--{this.props.item.name}  </span>
+            <span>my tag cool {this.props.index}--{this.props.data.name}  </span>
             <button className="button"
-                    onClick={()=>this.myCustomRenderFunction(this.props.item)}>Edit</button>
+                    onClick={()=>this.myCustomRenderFunction(this.props.data)}>Edit</button>
             <button onClick={()=>this.props.onSelectedEvent({test:"new"})}>Delete</button>
         </div>;
     }

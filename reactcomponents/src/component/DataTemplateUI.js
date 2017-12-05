@@ -15,7 +15,7 @@ class DataTemplateUI extends Component{
 }
 
 DataTemplateUI.propTypes = {
-    item: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired,
     path: PropTypes.string,
     onSelectEvent: PropTypes.func
 

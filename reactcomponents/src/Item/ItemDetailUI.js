@@ -4,7 +4,7 @@ import Item from './Item';
 import {Input,Form,Field} from '../component/form'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+const it = {idx :0, desc: 'Sfffffporting Goods', price: '$49.99' ,stocked: true, name: 'Football'}
 class ItemDetailUI extends DetailUI {
 
     constructor(props) {
@@ -34,18 +34,21 @@ class ItemDetailUI extends DetailUI {
 
         }
         this.onChangeQty = this.onChangeQty.bind(this);
+        this.test = this.test.bind(this);
     }
 
 
-    render(){
-        console.log("test")
-        return <div>
-            <Form form="item" validate={this.handleValidate} onSubmit={this.handleSubmit}
-                  formUI={this.formUI} formModel={this.formModel} >
-            </Form>
-            <button onClick={this.onSubmit}>test</button>
-        </div>
+    test=(event, newValue, previousValue)=>{
+        console.log("test in itemdetail");
+        let storableQty = this.props.item.values.storableQty;
+        const q= (!storableQty?newValue:storableQty+newValue) ;
+        const cal={
+            storableQty:q
+        }
+        return cal;
     }
+
+
     handleOnChangeQty=(event,newValue,prev)=>{
         // dispatch(addItem(values.qty));
         console.log("=================item=======================================================")
@@ -65,19 +68,21 @@ class ItemDetailUI extends DetailUI {
             // this.props.saveItem(newValue);
 
         }
-        console.log(newValue)
+        console.log(newValue);
+
+        //how to call childs certain update  method ??
     }
 
     handleSubmit(values){
         console.log("----------------------------------------------------");
         console.log(values);
+
     }
 
     handleValidate=(values)=>{
-        console.log("valieaa=========================")
-        console.log(values);
+        // console.log("valieaa=========================")
+        // console.log(values);
     }
-
 
 
     handleInputChange(e){
@@ -97,12 +102,51 @@ class ItemDetailUI extends DetailUI {
         this.props.onSubmit(this.state.item);
         // this.setState({item:{}});
     }
+    tryclear=()=>{
+        this.props.clear();
+    }
+
+    render(){
+        console.log("itemdetail ");
+        console.log(this.props.data);
+        const item = this.props.data;//{name:"test -------",desc:"desc "+new Date().getTime(),qty:60};
+        return <div>
+            <Form test={this.test} cc={this.props.tt}  form="item" validate={this.handleValidate} onSubmit={this.handleSubmit}
+                  formUI={this.formUI} formModel={this.formModel} initialValues={item}
+                  enableReinitialize={true}>
+            </Form>
+            <button onClick={this.tryclear}>test</button>
+        </div>
+    }
 }
+
+const mapStateToProps = state => {
+    return {
+        item:  state.form.item
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        saveItem: item => {
+            dispatch(addItem(item))
+        },
+        clear:()=>{
+            // dispatch(reset("item"))
+            Form.clearx(dispatch,"item");
+        }
+}
+};
+
+export  default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ItemDetailUI);
 
 const initialState={
     item : {
-        code:"",
-        desc:"",
+        name:" i m cccc",
+        desc:"desfffffffff",
         qty:20,
         amount:10
     }
@@ -116,23 +160,5 @@ export const ADD_ITEM = "ADD_ITEM";
 
 
 
-const mapStateToProps = state => {
-    return {
-        // item: state.form.item
-    }
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        saveItem: item => {
-            dispatch(addItem(item))
-        }
-    }
-};
 
 
-
-export  default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ItemDetailUI);
