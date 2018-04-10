@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import DataTemplateUI from './DataTemplateUI';
+import './DataCollectionUI.css';
 
 const RendererClass = DataTemplateUI;
 
@@ -45,7 +46,7 @@ class DataCollectionUI extends Component{
         const comps = [];
             let index=0;
             for (const item of collection){
-                comps.push(<div key={'DataCollectionUI-ItemKey'+ (index++)}>
+                comps.push(<div className="divTableRow" key={'DataCollectionUI-ItemKey'+ (index++)}>
                     <ContentRender data={item} index={index}
                                    onSelectedEvent={this.onParentLevelSelectedEvent}>
 
@@ -55,10 +56,10 @@ class DataCollectionUI extends Component{
 
                 </div>);
             }
-            return <div>
+            return <div className="data-collection-ui">
                     {comps}
-                {CustomFooter && <CustomFooter name="jawath"/>}
-            </div>;
+                    {CustomFooter && <CustomFooter name="jawath"/>}
+                </div>;
         }
        return <div>default implementation of list iteration should go her</div>
     }

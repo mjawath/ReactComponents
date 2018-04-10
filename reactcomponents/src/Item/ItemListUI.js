@@ -15,10 +15,10 @@ class ItemRender extends DataTemplateUI{
         const item = this.props.data;
 
         return <div>
-            <div>{item.name}</div>
-            <div>{item.desc}</div>
-            <div>{item.qty}</div>
-            <div>{item.storableQty}</div>
+            <div className="data-collection-cell">{item.name}</div>
+            <div className="data-collection-cell">{item.desc}</div>
+            <div className="data-collection-cell">{item.qty}</div>
+            <div className="data-collection-cell">{item.storableQty}</div>
         </div>;
     }
 }
