@@ -10,18 +10,18 @@ export const fetchDetails = ( permalink ) => ( {
     },
 } );
 
-export const fetchList = ( ) => ( {
-    type: types.FETCH_LIST,
-    meta: {
-        async: true,
-        blocking: true,
-        path: "/products",
-        method: "GET",
-    },
+export const itemsFetchDataSuccess = (data) => ( {
+    type: types.FETCH_LIST_COMPLETED  ,  
+    payload:data
+} );
+
+export const itemsHasErrored = (data) => ( {
+    type: types.FETCH_DETAILS_FAILED  ,  
+    payload:data
 } );
 
 const addItem=
     (payload)=> {
-        return{type:ADD_ITEM,payload:payload};
+        return{type:types.ADD_ITEM,payload:payload};
     }
 

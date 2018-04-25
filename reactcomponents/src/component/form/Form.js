@@ -108,7 +108,6 @@ class Form extends Component{
 
     render(){
         const { handleSubmit, pristine, reset, submitting } = this.props;
-        console.log(this.props.initialValues);
         return <form onSubmit={handleSubmit} /*action={this.props.action}*/  /*method={this.props.method ? this.props.method : 'post'}*/
                      {...this.props.extras}  >
             {this.props.children}

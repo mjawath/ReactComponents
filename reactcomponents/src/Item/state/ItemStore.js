@@ -16,6 +16,9 @@ export  const ItemR =(state=initialState,action)=>{
             // inI.lastName = inI.lastName + action.payload;
 
             return  {...state,item: inI}
+            case types.ADD_ITEM :
+            
+            
         default:
             return 'foh cool';
     }

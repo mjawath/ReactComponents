@@ -5,6 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import store from './Store';
 import { Provider } from 'react-redux';
+import {test} from './Test';
 
 
 ReactDOM.render(<Provider store={store}>
@@ -12,3 +13,5 @@ ReactDOM.render(<Provider store={store}>
                 </Provider>,
     document.getElementById('root'));
 registerServiceWorker();
+
+export default test;

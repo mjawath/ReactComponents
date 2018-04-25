@@ -107,8 +107,6 @@ class ItemDetailUI extends DetailUI {
     }
 
     render(){
-        console.log("itemdetail ");
-        console.log(this.props.data);
         const item = this.props.data;//{name:"test -------",desc:"desc "+new Date().getTime(),qty:60};
         return <div>
             <Form test={this.test} cc={this.props.tt}  form="item" validate={this.handleValidate} onSubmit={this.handleSubmit}

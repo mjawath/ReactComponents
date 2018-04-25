@@ -4,7 +4,8 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 // import {ADD_ITEM} from "./Item/ItemDetailUI";
 import {ADD_ITEM} from "./Item/state/types";
-import {ItemR as item} from './Item/state/ItemStore';
+import {item} from './Item/state/reducers';
+
 
 const middleware = [ thunk ];
 if (process.env.NODE_ENV !== 'production') {
