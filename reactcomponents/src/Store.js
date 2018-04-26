@@ -20,11 +20,11 @@ const rootReducer = combineReducers({
         item:(state,action)=>{
 
             switch (action.type){
-                case ADD_ITEM:
-                    let value = state.fields.qty;
-                    let nlastName = state.fields.lastName? (state.fields.lastName+ value): value;
-                    // let newvalues = [lastName];
-                    return {...state,fields:{...state.fields,lastName:nlastName}};
+                // case ADD_ITEM:
+                //     let value = state.fields.qty;
+                //     let nlastName = "state.fields.lastName? (state.fields.lastName+ value): value";
+                //     // let newvalues = [lastName];
+                //     return {...state,fields:{...state.fields,lastName:nlastName}};
                 default: state;
 
 

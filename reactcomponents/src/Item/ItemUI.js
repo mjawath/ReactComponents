@@ -32,9 +32,10 @@ class ItemUI extends EntityUI{
                     <ItemDetailUI tt={this.state.tt} data={this.state.selectedItem}>
 
                     </ItemDetailUI>
-                    <ItemListUI onSelectItem={this.onSelectItem}>
+                    <ItemListUI data={this.props.items} onSelectItem={this.onSelectItem}>
 
                     </ItemListUI>
+                    <button onClick={this.componentWillMount}></button>
                 </div>;
 
     }
@@ -56,19 +57,23 @@ class ItemUI extends EntityUI{
         });
         this.props.onLoad();
     }
+
+    componentWillMount=()=>{
+        this.props.onLoad();
+    }
+
 }
 
 
 
 const mapStateToProps=(state)=> {  
-    return {items: state.items}
+    return {items: state.itemForm.items}
   }
   
   const mapDispatchToProps=(dispatch)=> {  
     return { 
         onLoad: () => {
             dispatch(itemsFetchData());
-            console.log("test   redux");
         }
     }
 }
@@ -97,7 +102,7 @@ const itemsFetchData=()=> {
 
             console.log("item fetching");
             
-            const url = "http://localhost:8080/api/v1/items";
+            const url = "http://localhost:8000/items";
             axios.get(url)
             .then((response) => dispatch(itemsFetchDataSuccess( response.data)))
             .catch((response) => dispatch(itemsHasErrored(true)));

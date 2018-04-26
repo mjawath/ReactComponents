@@ -42,7 +42,7 @@ class DataCollectionUI extends Component{
         const  CustomFooter =this.props.footer;// capitalisation is importent without it , this is not working
         const collection = this.props.collection;
         const ContentRender = this.props.contentRender;
-        if(ContentRender && ContentRender.prototype instanceof RendererClass){
+        if(collection && ContentRender && ContentRender.prototype instanceof RendererClass){
         const comps = [];
             let index=0;
             for (const item of collection){
@@ -67,7 +67,6 @@ class DataCollectionUI extends Component{
 
 DataCollectionUI.propTypes = {
 
-        collection: PropTypes.array.isRequired,
         contentRender: PropTypes.func,
         footer: PropTypes.func,
         itemEvent: PropTypes.func,

@@ -31,12 +31,11 @@ export default class ItemListUI extends ListViewUI{
         const myData = Items;
 
         return <div>
-            <DataCollectionUI collection={myData} contentRender={ItemRender}
+            <DataCollectionUI collection={this.props.data} contentRender={ItemRender}
                               onSelect={this.props.onSelectItem}
             />
         </div>;
     }
-
 
 }
 

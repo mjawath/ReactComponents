@@ -10,9 +10,9 @@ export const fetchDetails = ( permalink ) => ( {
     },
 } );
 
-export const itemsFetchDataSuccess = (data) => ( {
+export const itemsFetchDataSuccess = (payload) => ( {
     type: types.FETCH_LIST_COMPLETED  ,  
-    payload:data
+    payload
 } );
 
 export const itemsHasErrored = (data) => ( {
