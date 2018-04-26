@@ -3,8 +3,6 @@
  */
 import React,{Component} from 'react';
 import {reduxForm,Field,reset} from "redux-form";
-const ini = {name:"test name",qty:35,desc:"222"}
-
 
 class Form extends Component{
 
@@ -82,25 +80,19 @@ class Form extends Component{
      this.props.submit();
     }
 
-    //   handleSubmit=(values)=>{
-    //     // e.preventDefault();
-    //     console.log("------------------------------------------");
-    //     console.log(values);
-    // }
 
     handleChangex=(event, newValue, previousValue)=>{
-        console.log("changeeeeeeeeeeeeeeeeeeeeeee")
-        console.log(newValue);
-        //do i can trigger reducer
-        // this.props.change("storableQty",newValue);
-        const tt= this.props.test(event, newValue, previousValue);
-        for (const key in tt) {
-            this.props.change(key, tt[key]);
-        }
-        // window.alert("post "+tt);
+        // //do i can trigger reducer
+        // // this.props.change("storableQty",newValue);
+        // const tt= this.props.test(event, newValue, previousValue);
+        // for (const key in tt) {
+        //     this.props.change(key, tt[key]);
+        // }
+        // // window.alert("post "+tt);
 
-        console.log(tt)
+        // console.log(tt)
     }
+
     clear=()=>{
         this.props.clear();
     }

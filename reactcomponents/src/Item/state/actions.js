@@ -20,6 +20,23 @@ export const itemsHasErrored = (data) => ( {
     payload:data
 } );
 
+
+
+
+export const itemSaveSuccess = (payload) => ( {
+    type: types.POST_ITEM_COMPLETED  ,  
+    payload
+} );
+
+
+
+
+
+
+
+
+
+
 const addItem=
     (payload)=> {
         return{type:types.ADD_ITEM,payload:payload};

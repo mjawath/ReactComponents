@@ -12,6 +12,7 @@ import EntityUI from '../Detail/EntityUI';
 import ItemDetailUI from './ItemDetailUI';
 import ItemListUI from './ItemListUI';
 import {Items} from '../component/MockData';
+import {url} from './Constents'
 
 import {itemsFetchDataSuccess,itemsHasErrored} from '../Item/state/actions';
 
@@ -100,9 +101,8 @@ const itemsFetchData=()=> {
             // .then((items) => dispatch(itemsFetchDataSuccess(items)))
             // .catch(() => dispatch(itemsHasErrored(true)));
 
-            console.log("item fetching");
-            
-            const url = "http://localhost:8000/items";
+            console.log("item fetching");            
+
             axios.get(url)
             .then((response) => dispatch(itemsFetchDataSuccess( response.data)))
             .catch((response) => dispatch(itemsHasErrored(true)));

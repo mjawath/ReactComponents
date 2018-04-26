@@ -1,10 +1,19 @@
 import React     from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import axios from "axios";
+
 import DetailUI from '../Detail/DetailUI';
 import Item from './Item';
 import {Input,Form,Field} from '../component/form'
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-const it = {idx :0, desc: 'Sfffffporting Goods', price: '$49.99' ,stocked: true, name: 'Football'}
+
+import {BASE_API_URL} from '../component/commons/Constants'
+import {itemSaveSuccess,itemsHasErrored} from './state/actions';
+
+import {post} from '../component/commons/HttpComunications';
+
+const ITEMS_URL =  "/items";
+
 class ItemDetailUI extends DetailUI {
 
     constructor(props) {
@@ -73,9 +82,10 @@ class ItemDetailUI extends DetailUI {
         //how to call childs certain update  method ??
     }
 
-    handleSubmit(values){
-        console.log("----------------------------------------------------");
+    handleSubmit=(values)=>{
+        console.log("---------------------submiting data -------------------------------");
         console.log(values);
+        this.props.saveItem(values);
 
     }
 
@@ -86,14 +96,14 @@ class ItemDetailUI extends DetailUI {
 
 
     handleInputChange(e){
-        console.log(e);
-        const value = e.target.value;
-        const property = e.target.name;
-        const itemN = this.state.item;
-        itemN[property] = value;
-        this.setState(()=>{
-            return{ item : itemN};
-        });
+        // console.log(e);
+        // const value = e.target.value;
+        // const property = e.target.name;
+        // const itemN = this.state.item;
+        // itemN[property] = value;
+        // this.setState(()=>{
+        //     return{ item : itemN};
+        // });
     }
 
     onSubmit(e){
@@ -127,7 +137,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         saveItem: item => {
-            dispatch(addItem(item))
+           dispatch(postItem(item));   
         },
         clear:()=>{
             // dispatch(reset("item"))
@@ -136,19 +146,23 @@ const mapDispatchToProps = dispatch => {
 }
 };
 
-export  default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ItemDetailUI);
+const postItem=(item )=>{
+   return (dispatch)=> post(ITEMS_URL,item,
+        (response) => {dispatch(itemSaveSuccess(response))},
+        (error) => {dispatch(itemsHasErrored())});  
+}   
 
-const initialState={
-    item : {
-        name:" i m cccc",
-        desc:"desfffffffff",
-        qty:20,
-        amount:10
-    }
-};
+// const test=(item)=>{
+//     axios.post(BASE_API_URL.concat(url),body)
+//       .then(response=>{
+//         actionOnSuccess (response)
+//       })
+//       .catch(error=>{
+//         actionOnFailier (error)
+//       });
+// }
+
+
 export const ADD_ITEM = "ADD_ITEM";
 
  const addItem=
@@ -159,4 +173,9 @@ export const ADD_ITEM = "ADD_ITEM";
 
 
 
+
+export  default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ItemDetailUI);
 
