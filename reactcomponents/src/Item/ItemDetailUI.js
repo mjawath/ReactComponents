@@ -7,12 +7,8 @@ import DetailUI from '../Detail/DetailUI';
 import Item from './Item';
 import {Input,Form,Field} from '../component/form'
 
-import {BASE_API_URL} from '../component/commons/Constants'
-import {itemSaveSuccess,itemsHasErrored} from './state/actions';
+import {postItem, itemGet} from './ItemApi';
 
-import {post} from '../component/commons/HttpComunications';
-
-const ITEMS_URL =  "/items";
 
 class ItemDetailUI extends DetailUI {
 
@@ -137,7 +133,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         saveItem: item => {
-           dispatch(postItem(item));   
+           dispatch(postItem(item))
+           .then(()=> dispatch(itemGet()));  
         },
         clear:()=>{
             // dispatch(reset("item"))
@@ -146,11 +143,6 @@ const mapDispatchToProps = dispatch => {
 }
 };
 
-const postItem=(item )=>{
-   return (dispatch)=> post(ITEMS_URL,item,
-        (response) => {dispatch(itemSaveSuccess(response))},
-        (error) => {dispatch(itemsHasErrored())});  
-}   
 
 // const test=(item)=>{
 //     axios.post(BASE_API_URL.concat(url),body)

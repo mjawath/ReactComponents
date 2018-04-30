@@ -12,9 +12,7 @@ import EntityUI from '../Detail/EntityUI';
 import ItemDetailUI from './ItemDetailUI';
 import ItemListUI from './ItemListUI';
 import {Items} from '../component/MockData';
-import {url} from './Constents'
-
-import {itemsFetchDataSuccess,itemsHasErrored} from '../Item/state/actions';
+import {itemGet} from './ItemApi';
 
 let items = Items;
 class ItemUI extends EntityUI{
@@ -33,6 +31,7 @@ class ItemUI extends EntityUI{
                     <ItemDetailUI tt={this.state.tt} data={this.state.selectedItem}>
 
                     </ItemDetailUI>
+                    
                     <ItemListUI data={this.props.items} onSelectItem={this.onSelectItem}>
 
                     </ItemListUI>
@@ -74,7 +73,7 @@ const mapStateToProps=(state)=> {
   const mapDispatchToProps=(dispatch)=> {  
     return { 
         onLoad: () => {
-            dispatch(itemsFetchData());
+            dispatch(itemGet());
         }
     }
 }
@@ -82,33 +81,7 @@ const mapStateToProps=(state)=> {
 
 
 
-const itemsFetchData=()=> {
-    
-    return (dispatch) => {
-        // dispatch(itemsIsLoading(true));
 
-        // fetch(url)
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             throw Error(response.statusText);
-        //         }
-
-        //         // dispatch(itemsIsLoading(false));
-
-        //         return response;
-        //     })
-            // .then((response) => response.json())
-            // .then((items) => dispatch(itemsFetchDataSuccess(items)))
-            // .catch(() => dispatch(itemsHasErrored(true)));
-
-            console.log("item fetching");            
-
-            axios.get(url)
-            .then((response) => dispatch(itemsFetchDataSuccess( response.data)))
-            .catch((response) => dispatch(itemsHasErrored(true)));
-
-    };
-}
 
 
 

@@ -1,0 +1,59 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "code": "json-server",
+      "desc": "typicode",
+      "name": "typicode",
+      "qty": "34"
+    },
+    {
+      "name": "fdsf",
+      "code": "json-fsdf",
+      "desc": "sfs",
+      "qty": "fsfs",
+      "id": 2
+    },
+    {
+      "name": "wefwef",
+      "desc": "wefwe",
+      "qty": "fwefwe",
+      "id": 3
+    },
+    {
+      "name": "123",
+      "id": 4
+    },
+    {
+      "name": "124343",
+      "id": 5
+    },
+    {
+      "name": "saffafsaf",
+      "id": 6
+    },
+    {
+      "name": "1234567",
+      "desc": "werwerwer",
+      "qty": "werwerwe",
+      "id": 7
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
