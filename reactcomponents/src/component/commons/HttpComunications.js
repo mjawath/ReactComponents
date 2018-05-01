@@ -8,7 +8,7 @@ export function post(url, body, actionOnSuccess, actionOnFailier) {
     })
     .catch(error => {
       actionOnFailier(error)
-      throw new Error(error);
+      throw error;
     });
 }
 
@@ -20,7 +20,7 @@ export function get(url, actionOnSuccess, actionOnFailier) {
     })
     .catch(error => {
       actionOnFailier(error);
-      throw new Error(error);
+      throw error;
     });
 }
 
@@ -31,7 +31,7 @@ export function put(url, body, actionOnSuccess, actionOnFailier) {
     })
     .catch(error => {
       actionOnFailier(error);
-      throw new Error(error);
+      throw error;
     });
 }
 
@@ -42,7 +42,7 @@ export function patch(url, body, actionOnSuccess, actionOnFailier) {
     })
     .catch(error => {
       actionOnFailier(error);
-      throw new Error(error);
+      throw error;
     });
 }
 
@@ -54,7 +54,7 @@ export function deletex(url, actionOnSuccess, actionOnFailier) {
     })
     .catch(error => {
       actionOnFailier(error);
-      throw new Error(error);
+      throw error;
     });
 }
 

@@ -141,9 +141,9 @@ const mapDispatchToProps = dispatch => {
         saveItem: item => {
             let prom = null;
         if(item.id){
-            prom=dispatch(postItem(item));
-        }else{
             prom=dispatch(putItem(item.id,item));
+        }else{
+            prom=dispatch(postItem(item));
         }           
           prom.then(()=> dispatch(itemGet()));  
         },
