@@ -28,7 +28,7 @@ export const postItem  = body => dispatch =>  {
 
 export const putItem  = (id,body) => dispatch =>  {
     
-    return put(ITEMS_URL,body,
+    return put(ITEMS_URL.concat("/".id),body,
         response => dispatch(itemSaveSuccess( response.data)),
         response => dispatch(itemsHasErrored(true)));     
 };
