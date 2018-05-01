@@ -25,19 +25,24 @@ class ItemUI extends EntityUI{
         }
     }
 
-    render(){
+    render() {
 
         return <div>
-                    <ItemDetailUI tt={this.state.tt} data={this.state.selectedItem}>
+            <ItemDetailUI data={this.state.selectedItem} onNew={this.onNew}>
 
-                    </ItemDetailUI>
-                    
-                    <ItemListUI data={this.props.items} onSelectItem={this.onSelectItem}>
+            </ItemDetailUI>
 
-                    </ItemListUI>
-                    <button onClick={this.componentWillMount}></button>
-                </div>;
+            <ItemListUI data={this.props.items} onSelectItem={this.onSelectItem}>
 
+            </ItemListUI>
+        </div>;
+
+    }
+
+    onNew=()=>{
+        this.setState(()=>{
+            return{ selectedItem:{}}
+         });
     }
 
     onDataSub(item){
@@ -52,10 +57,8 @@ class ItemUI extends EntityUI{
     onSelectItem=(item)=>{
         // this.selectedItem = item;
         this.setState(()=>{
-           return{ selectedItem:item,
-            tt : item.name}
+           return{ selectedItem:item}
         });
-        this.props.onLoad();
     }
 
     componentWillMount=()=>{

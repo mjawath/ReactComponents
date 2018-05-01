@@ -100,8 +100,8 @@ class Form extends Component{
 
     render(){
         const { handleSubmit, pristine, reset, submitting } = this.props;
-        return <form onSubmit={handleSubmit} /*action={this.props.action}*/  /*method={this.props.method ? this.props.method : 'post'}*/
-                     {...this.props.extras}  >
+        return <form {...this.props.extras} onSubmit={handleSubmit} >
+                       
             {this.props.children}
             {this.renderFields()}
             {this.renderControlButtons()}
@@ -159,8 +159,8 @@ class Form extends Component{
     }
 }
 
-Form.clearx=(dispatch,formName)=>{
-    dispatch(reset(formName));
+Form.clearx=(formName)=>{
+    return reset(formName);
 }
 
 export default reduxForm({
