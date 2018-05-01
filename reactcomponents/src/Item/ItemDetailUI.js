@@ -7,7 +7,7 @@ import DetailUI from '../Detail/DetailUI';
 import Item from './Item';
 import {Input,Form,Field} from '../component/form'
 
-import {postItem, itemGet} from './ItemApi';
+import {postItem, itemGet,deleteItem ,putItem} from './ItemApi';
 
 
 class ItemDetailUI extends DetailUI {
@@ -26,7 +26,8 @@ class ItemDetailUI extends DetailUI {
                 {name:"name", type:"text",component:"input" ,label:"Name"},
                 {name:"desc", type:"text",component:"input",label:"Description"},
                 {name:"qty", type:"text",component:"input",onChange:this.handleOnChangeQty},
-                {name:"storableQty", type:"text",component:"input", onChange:this.handleOnChangeQty}
+                {name:"storableQty", type:"text",component:"input", onChange:this.handleOnChangeQty},
+                {name:"id", type:"hidden",component:"input"}
                 //test field to check calculation
             ],
             onSubmit:this.handleSubmit,
@@ -38,8 +39,7 @@ class ItemDetailUI extends DetailUI {
             desc:" test desc",
 
         }
-        this.onChangeQty = this.onChangeQty.bind(this);
-        this.test = this.test.bind(this);
+
     }
 
 
@@ -112,6 +112,11 @@ class ItemDetailUI extends DetailUI {
         this.props.clear();
     }
 
+    onDelete=()=>{
+        const item = this.props.data;
+        this.props.onDelete(item.id);
+    }
+
     render(){
         const item = this.props.data;//{name:"test -------",desc:"desc "+new Date().getTime(),qty:60};
         return <div>
@@ -120,6 +125,7 @@ class ItemDetailUI extends DetailUI {
                   enableReinitialize={true}>
             </Form>
             <button onClick={this.tryclear}>test</button>
+            <button name="Delete" onClick={this.onDelete}>Delete</button>
         </div>
     }
 }
@@ -133,12 +139,21 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         saveItem: item => {
-           dispatch(postItem(item))
-           .then(()=> dispatch(itemGet()));  
+            let prom = null;
+        if(item.id){
+            prom=dispatch(postItem(item));
+        }else{
+            prom=dispatch(putItem(item.id,item));
+        }           
+          prom.then(()=> dispatch(itemGet()));  
         },
         clear:()=>{
             // dispatch(reset("item"))
             Form.clearx(dispatch,"item");
+        },
+        onDelete:(id)=>{
+            dispatch(deleteItem(id))
+            .then(()=> dispatch(itemGet()));  
         }
 }
 };

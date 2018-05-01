@@ -15,6 +15,11 @@ export const itemsFetchDataSuccess = (payload) => ( {
     payload
 } );
 
+export const itemsDeleteSuccess = (payload) => ( {
+    type: types.DELETE_ITEM_COMPLETED  ,  
+    payload
+} );
+
 export const itemsHasErrored = (data) => ( {
     type: types.FETCH_DETAILS_FAILED  ,  
     payload:data
@@ -27,6 +32,8 @@ export const itemSaveSuccess = (payload) => ( {
     type: types.POST_ITEM_COMPLETED  ,  
     payload
 } );
+
+
 
 
 

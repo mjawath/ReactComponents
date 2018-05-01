@@ -154,6 +154,7 @@ class Form extends Component{
                 <button type="button" disabled={pristine || submitting} onClick={reset}>
                     Clear Values
                 </button>
+                <button type="button" disabled={pristine || submitting}>Delete</button>
             </div></div>;
     }
 }
