@@ -5,6 +5,7 @@ import { createLogger } from 'redux-logger';
 // import {ADD_ITEM} from "./Item/ItemDetailUI";
 import {ADD_ITEM} from "./Item/state/types";
 import {item} from './Item/state/reducers';
+import  {ui} from './component/UIReducer';
 
 
 const middleware = [ thunk ];
@@ -33,7 +34,8 @@ const rootReducer = combineReducers({
 
         }
     }),
-    itemForm:item
+    itemForm:item,
+    ui:ui
 });
 
 const store = createStore(

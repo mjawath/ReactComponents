@@ -2,7 +2,7 @@
  * Created by jawa on 11/21/17.
  */
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 import ListViewUI from '../Detail/ListViewUI';
@@ -11,10 +11,11 @@ import { Items } from '../component/MockData';
 import DataCollectionUI from "../component/DataCollectionUI";
 
 import ItemSearchUI from "./ItemSearchUI";
-import {itemsFetchDataSuccess,itemsHasErrored} from '../Item/state/actions';
-import {ITEMS_URL} from './Constents';
-import {get} from '../component/commons/HttpComunications';
-import {itemGet} from './ItemApi';
+import { itemsFetchDataSuccess, itemsHasErrored } from '../Item/state/actions';
+import { ITEMS_URL } from './Constents';
+import { get } from '../component/commons/HttpComunications';
+import { itemGet } from './ItemApi';
+
 
 
 class ItemRender extends DataTemplateUI {
@@ -33,26 +34,37 @@ class ItemRender extends DataTemplateUI {
 
 class ItemListUI extends ListViewUI {
 
-
-    onSearch=(params)=>{
-        console.log("searching initiated "+params);
-        this.props.onItemLoad(params);
+    constructor(){
+        super();
+        this.randomUIKey = "list" + Math.random();
     }
+
+    // onSearch = (params) => {
+    //     console.log("searching initiated " + this.randomUIKey);
+    //     this.props.onItemLoad(this.randomUIKey);
+    //     // this.props.onItem(this.randomUIKey);
+    // }
 
     render() {
         //for each item
         const myData = Items;
-
+        const {  ui } = this.props;
         return <div>
             <ItemSearchUI onSearch={this.onSearch}>
             </ItemSearchUI>
+            {ui && ui.meta && ui.meta.key == this.randomUIKey && ui.meta.status 
+            && <span>loading ...........</span>}
+           
             <DataCollectionUI collection={this.props.data} contentRender={ItemRender}
-                onSelect={this.props.onSelectItem}/>
-            
+                onSelect={this.props.onSelectItem} />
+        <button onClick={this.onSearch}> test</button>
         </div>;
     }
+    
+    
 
 }
+
 
 ItemListUI.propTypes = {
 
@@ -62,14 +74,17 @@ ItemListUI.propTypes = {
 
 
 
-const mapStateToProps=(state)=> {  
-    return {items: state.itemForm.items}
-  }
-  
-  const mapDispatchToProps=(dispatch)=> {  
-    return { 
-        onItemLoad: () => {
-            dispatch(itemGet());
+const mapStateToProps = (state) => {
+    return {
+        items: state.itemForm.items,
+        ui: state.ui
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onItemLoad: (params) => {
+            dispatch(itemGet(params));
         }
     }
 }
@@ -78,4 +93,4 @@ const mapStateToProps=(state)=> {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(ItemListUI);
+)(ItemListUI);

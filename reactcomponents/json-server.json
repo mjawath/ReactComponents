@@ -1,11 +1,6 @@
-<<<<<<< .mine
-{
-  "port": 8001,
-	"watch": true
-}
-=======
+
 {
   "port": 8001,
   "watch": true
 }
->>>>>>> .theirs
+

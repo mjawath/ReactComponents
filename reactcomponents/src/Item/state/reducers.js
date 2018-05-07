@@ -9,7 +9,7 @@ export const item = (state ={},action)=>{
          console.log(action.payload);
          return  {item:{}};                  
          case types.FETCH_DETAILS_FAILED:
-         return  {error:action.payload};
+         return  {error:action.payload};        
         default :
         return  state
     }
